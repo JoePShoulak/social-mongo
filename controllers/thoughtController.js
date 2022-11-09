@@ -1,6 +1,5 @@
 // ObjectId() method for converting userId string into an ObjectId for querying database
-const { ObjectId } = require("mongoose").Types;
-const { Thought, User } = require("../models");
+const { Thought } = require("../models");
 
 module.exports = {
   // Get all thoughts
@@ -9,7 +8,7 @@ module.exports = {
       const data = await Thought.find({});
 
       if (!data) {
-        return res.status(404).json({ message: "No matching thought in db." });
+        return res.status(404).json({ message: "Thought not found." });
       } else {
         res.status(200).json(data);
       }
@@ -24,7 +23,7 @@ module.exports = {
     try {
       const data = await Thought.findOne({ _id: req.params.thoughtId });
       if (!data) {
-        return res.status(404).json({ message: "No matching thought in db." });
+        return res.status(404).json({ message: "Thought not found." });
       } else {
         res.status(200).json(data);
       }
@@ -67,7 +66,7 @@ module.exports = {
       });
 
       if (!data) {
-        return res.status(404).json({ message: "No such thought exists" });
+        return res.status(404).json({ message: "Thought not found." });
       }
 
       res.status(200).json(data);

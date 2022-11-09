@@ -51,7 +51,5 @@ connection.once("open", async () => {
     { new: true }
   );
 
-  // Log out the seed data to indicate what should appear in the database
-  // console.table();
   console.info("Seeding complete! 🌱");
 });

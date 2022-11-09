@@ -1,5 +1,4 @@
 // ObjectId() method for converting userId string into an ObjectId for querying database
-const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
 module.exports = {
@@ -16,7 +15,7 @@ module.exports = {
         })
         .populate("friends");
       if (!users) {
-        return res.status(404).json({ message: "No matching user in db." });
+        return res.status(404).json({ message: "User not found." });
       } else {
         res.status(200).json(users);
       }
@@ -38,7 +37,7 @@ module.exports = {
         })
         .populate("friends");
       if (!users) {
-        return res.status(404).json({ message: "No matching user in db." });
+        return res.status(404).json({ message: "User not found." });
       } else {
         res.status(200).json(users);
       }
@@ -76,7 +75,7 @@ module.exports = {
       const data = await User.findOneAndRemove({ _id: req.params.userId });
 
       if (!data) {
-        return res.status(404).json({ message: "No such user exists" });
+        return res.status(404).json({ message: "User not found." });
       }
 
       const removeThought = await Thought.deleteMany({
